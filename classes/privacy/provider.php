@@ -15,13 +15,32 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'block_quiz_results', language 'en', branch 'MOODLE_20_STABLE'
+ * Privacy Subsystem implementation for block_quiz_results.
  *
  * @package    block_quiz_results
- * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright  2018 Zig Tan <zig@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['pluginname'] = 'Quiz results (disabled)';
-$string['quiz_results:addinstance'] = 'Add a new quiz results block';
-$string['privacy:metadata'] = 'The Quiz results block only shows data stored in other locations.';
+namespace block_quiz_results\privacy;
+
+defined('MOODLE_INTERNAL') || die();
+
+/**
+ * Privacy Subsystem for block_quiz_results implementing null_provider.
+ *
+ * @copyright  2018 Zig Tan <zig@moodle.com>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class provider implements \core_privacy\metadata\null_provider {
+
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return  string
+     */
+    public static function get_reason() : string {
+        return 'privacy:metadata';
+    }
+}
